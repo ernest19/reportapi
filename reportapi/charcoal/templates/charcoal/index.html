@@ -1,0 +1,136 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>galamsey</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <!-- References: https://github.com/fancyapps/fancyBox -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   <style type="text/css">
+   	#mapid { height: 92vh; };
+    .gallery{
+        display: inline-block;
+        margin-top: 20px;
+    }
+    .thumbnail {
+     margin-bottom:0px; 
+    }
+    .head a { display: inline-block; margin-top: 2px; padding: 15px;}
+    .legendline { padding: 15px;}
+    .legendline span, .legendline h4 { display: inline-block; }
+    .legendline span { width: 20px; height: 10px; margin-right:10px;   }
+    .legendline h6 { display: inline-block; }
+    .chckdInput { float: right; margin-right: 30px!important; margin-top: 2px!important; }
+    .legendline h4 { margin: 0px; }
+    .reg{background: red!important;}
+    .dist{background: #499!important;}
+   </style>
+<body>
+
+
+
+
+<div class="container-fluid">
+
+  <div id="oveli" class="" style="position: absolute;z-index: 999999999999;background: rgba(0, 0, 0, 0.5);width:100%;height:100%"><img src="{% static '/img/loading.gif' %}" alt=""  style="width: 10%;height: 20%;margin-left:40%;top: 39%;position: absolute;"><label style="top:49%;margin-left:40%;">Loading ...</label> </div>
+
+
+    <div class="row head" style="height: 8vh; background: #fff; border-bottom:1px solid #004373;">
+        <a href="https://servirglobal.net/Regions/West-Africa" target="new" class="SERVIR-WA;"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/SERVIR-WA.png" alt="SERVIR-WA"></a>
+        <a href="https://www.usaid.gov/" target="new" class="USAID"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/usaid.png" alt="USAID"></a>
+        <a href="https://www.nasa.gov/" target="new" class="NASA"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/nasa.png" alt="NASA"></a>
+        <a href="http://www.agrhymet.ne/eng/" target="new" class="CLISS"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/cliss.png" alt="CLISS"></a>
+        <a href="http://www.cersgis.org" target="new" class="CERSGIS"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/cersgis.png" alt="CERSGIS"></a>
+    </div>
+    <div class="row base"style="height: 92vh;">
+        <div class="col-md-9" id="mapid"></div>
+        <div class="col-md-3" style="padding: 0px; background: #004373; height: 100%; overflow: none;">
+          <div class="col-md-12" id="alert_cont" style=" margin-bottom: 20px; padding:0px; overflow-y: auto;">
+            
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="position: absolute;z-index: 999; bottom: 0px; height:auto; background: #fff; width: 300px;">
+  <div class="legendline">
+    <div class="row" style="text-align: center;"> LEGEND</div>
+    <hr>
+    <span class="reg"> </span>
+    <h4> Region</h4>
+    <input class="chckdInput" id="regcheck" type='checkbox' checked>
+    <hr>
+    <span class="dist"> </span>
+    <h4> District</h4>
+    <input class="chckdInput" id="districtcheck" type='checkbox' checked>
+    <span class="pointcheck"> </span>
+    <hr>
+    <h4> Charcoal Point</h4>
+    <input class="chckdInput" id="pointcheck" type='checkbox' checked>
+
+  </div>
+  
+</div>
+
+<div>
+  
+</div>
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+
+ <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+<script src="/static/charcoal/js/map.js"></script>
+
+
+<script type="text/javascript">
+	
+  $.get("/charcoal/charcoalalert/" ,function(data){
+    
+
+    $('#alert_cont').html(data)
+
+
+
+     // $('#overlay').addClass('hidden');
+    })
+
+
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

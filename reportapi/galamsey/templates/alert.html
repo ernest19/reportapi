@@ -1,0 +1,69 @@
+ 
+
+{% for aa in alert %}
+
+<!-- {{current.date}} <br>aaaa
+{{aa.created_date.date}} -->
+<div class="{% if current.date == aa.created_date.date %}  alert alert-danger {% else %} alert alert-warning  {% endif %} row galamsey " id="{{aa.id}}" style="position: relative;margin: 5px;cursor: pointer; padding: 5px 0px;">
+ 	<div class="row">
+ 		
+ 	</div>
+ 	<div class="col-md-3" style="padding:0px 5px;">
+        {% if aa.image %}
+        <a class="thumbnail fancybox" rel="ligthbox" href="/media/{{aa.image}}">
+            <img src="/media/{{aa.image}}" style="width:100%; height:80px" >
+        </a>
+        
+        {% else %}
+
+
+         <a class="thumbnail fancybox" rel="ligthbox" href="/media/img/no-image.png">
+            <img src="/media/img/no-image.png" style="width:100%; height:80px" >
+        </a>
+
+        {% endif %}
+
+
+ 	</div>
+ 	<div class="col-md-9">
+ 		<div class="row">
+ 			<h4 style="font-weight: 400; margin-top: 10px;"> {{aa.Description}}  </h4>
+ 		 	<h6><i class="fa fa-calendar" aria-hidden="true" style="margin:7px;"></i> {{aa.created_date}} </h6>
+ 		</div>
+ 	</div>
+   
+</div>
+
+<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" alt="" style="width:100%;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+
+
+<script type="text/javascript">
+
+
+
+$(document).ready(function() {
+	$(".galamsey ").click(function() {
+	    // alert("helloo")
+	    getextent($(this).attr("id"))
+	})
+
+        //FANCYBOX
+    //https://github.com/fancyapps/fancyBox
+    $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+    });
+});
+</script>
