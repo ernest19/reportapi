@@ -80,3 +80,6 @@ class incidentReports(models.Model):
 # 				point = GEOSGeometry(point)
 # 				self.geom  = point
 # 			super(charcoalReports, self).save(*args, **kwargs)    
+
+
+print "hellooooooo"

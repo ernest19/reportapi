@@ -2,185 +2,318 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>galamsey</title>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
+  <title>galamsey</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   <!-- References: https://github.com/fancyapps/fancyBox -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- References: https://github.com/fancyapps/fancyBox -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-   <style type="text/css">
-   	#mapid { height: 92vh; };
-    .gallery{
-        display: inline-block;
-        margin-top: 20px;
+  <style type="text/css">
+    #mapid {
+      height: 92vh;
     }
+
+    ;
+
+    .gallery {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
     .thumbnail {
-     margin-bottom:0px; 
+      margin-bottom: 0px;
     }
-    .head a { display: inline-block; margin-top: 2px; padding: 15px;}
-    .legendline { padding: 15px;}
-    .legendline span, .legendline h4 { display: inline-block; }
-    .legendline span { width: 20px; height: 10px; margin-right:10px;   }
-    .legendline img {width: 20px; height: auto; margin-right:10px;}
-    .legendline h6 { display: inline-block; }
-    .chckdInput { float: right; margin-right: 30px!important; margin-top: 2px!important; }
-    .legendline h4 { margin: 0px; }
-    .legendline hr {margin:5px 2px;}
-    .reg{background: red!important;}
-    .dist{background: #499!important;}
-    .pointcheck{background:red!important;}
-    #customers {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;}
-    #customers td, #customers th {    border: 1px solid #ddd;    padding: 8px;    }    
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
-    #customers tr:hover {background-color: #ddd;}
-    #customers th { padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #4CAF50; color: white; }
 
-    .switch {float: right;}
-    .switch input {display:none; float: right;}
-.slider {background-color: red;bottom: 0;cursor: pointer;left: 0;position: relative;right: 0; top: 0;transition: .4s;height: 21px;width: 45px;}
+    .head a {
+      display: inline-block;
+      margin-top: 2px;
+      padding: 15px;
+    }
 
-.slider:before {background-color: #fff;bottom: 4px;content: "";height: 14px;left: 4px;position: absolute;transition: .4s;width: 14px;}
+    .legendline {
+      padding: 15px;
+    }
 
-input:checked + .slider {background-color: #66bb6a;}
-input:checked + .slider:before {transform: translateX(26px);}
-.slider.round {border-radius: 34px;}
-.slider.round:before {border-radius: 50%;}
+    .legendline span,
+    .legendline h4 {
+      display: inline-block;
+    }
 
-  .ldbox {background: #eee; padding-top: 10px; border-radius: 6px; margin:3px auto;}
-  .ldbox:last-child {margin-bottom:15px!important;}
-       </style>
-    <body>
+    .legendline span {
+      width: 20px;
+      height: 10px;
+      margin-right: 10px;
+    }
+
+    .legendline img {
+      width: 20px;
+      height: auto;
+      margin-right: 10px;
+    }
+
+    .legendline h6 {
+      display: inline-block;
+    }
+
+    .chckdInput {
+      float: right;
+      margin-right: 30px !important;
+      margin-top: 2px !important;
+    }
+
+    .legendline h4 {
+      margin: 0px;
+    }
+
+    .legendline hr {
+      margin: 5px 2px;
+    }
+
+    .reg {
+      background: red !important;
+    }
+
+    .dist {
+      background: #499 !important;
+    }
+
+    .pointcheck {
+      background: red !important;
+    }
+
+    #customers {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+      background-color: #ddd;
+    }
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .switch {
+      float: right;
+    }
+
+    .switch input {
+      display: none;
+      float: right;
+    }
+
+    .slider {
+      background-color: red;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: relative;
+      right: 0;
+      top: 0;
+      transition: .4s;
+      height: 21px;
+      width: 45px;
+    }
+
+    .slider:before {
+      background-color: #fff;
+      bottom: 4px;
+      content: "";
+      height: 14px;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: 14px;
+    }
+
+    input:checked+.slider {
+      background-color: #66bb6a;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .ldbox {
+      background: #eee;
+      padding-top: 10px;
+      border-radius: 6px;
+      margin: 3px auto;
+    }
+
+    .ldbox:last-child {
+      margin-bottom: 15px !important;
+    }
+  </style>
+
+<body>
 
 
 
 
-    <div class="container-fluid">
-   <div id="oveli" class="" style="position: absolute;z-index: 999999999999;background: rgba(255, 255, 255, 0.5);;width:100%;height:100%"><img src="{% static '/img/preload_waiting.gif' %}" alt=""  style="width: 6%;height: 12%;margin-left:40%;top: 39%;position: absolute;"></div>
+  <div class="container-fluid">
+    <div id="oveli" class=""
+      style="position: absolute;z-index: 999999999999;background: rgba(255, 255, 255, 0.5);;width:100%;height:100%"><img
+        src="{% static '/img/preload_waiting.gif' %}" alt=""
+        style="width: 6%;height: 12%;margin-left:40%;top: 39%;position: absolute;"></div>
 
 
 
     <div class="row head" style="height: 8vh; background: #fff; border-bottom:1px solid #004373;">
-        <a href="https://servirglobal.net/Regions/West-Africa" target="new" class="SERVIR-WA;"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/SERVIR-WA.png" alt="SERVIR-WA"></a>
-        <a href="https://www.usaid.gov/" target="new" class="USAID"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/usaid.png" alt="USAID"></a>
-        <a href="https://www.nasa.gov/" target="new" class="NASA"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/nasa.png" alt="NASA"></a>
-        <a href="http://www.agrhymet.ne/eng/" target="new" class="CLISS"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/cliss.png" alt="CLISS"></a>
-        <a href="http://www.cersgis.org" target="new" class="CERSGIS"><img class="img-responsive" style="height: 48px; margin: 2px 5px;" src="/static/img/cersgis.png" alt="CERSGIS"></a>
+      <a href="https://servirglobal.net/Regions/West-Africa" target="new" class="SERVIR-WA;"><img class="img-responsive"
+          style="height: 48px; margin: 2px 5px;" src="/static/img/SERVIR-WA.png" alt="SERVIR-WA"></a>
+      <a href="https://www.usaid.gov/" target="new" class="USAID"><img class="img-responsive"
+          style="height: 48px; margin: 2px 5px;" src="/static/img/usaid.png" alt="USAID"></a>
+      <a href="https://www.nasa.gov/" target="new" class="NASA"><img class="img-responsive"
+          style="height: 48px; margin: 2px 5px;" src="/static/img/nasa.png" alt="NASA"></a>
+      <a href="http://www.agrhymet.ne/eng/" target="new" class="CLISS"><img class="img-responsive"
+          style="height: 48px; margin: 2px 5px;" src="/static/img/cliss.png" alt="CLISS"></a>
+      <a href="http://www.cersgis.org" target="new" class="CERSGIS"><img class="img-responsive"
+          style="height: 48px; margin: 2px 5px;" src="/static/img/cersgis.png" alt="CERSGIS"></a>
     </div>
-    <div class="row base"style="height: 92vh;">
-     
+    <div class="row base" style="height: 92vh;">
 
-        <div class="col-md-9" id="mapid"></div>
-        <div class="col-md-3" style="padding: 0px; background: #004373; height:92vh; overflow: none;overflow-y: auto">
-          <div class="col-md-12" id="alert_cont" style=" margin-bottom: 20px; padding:0px; ">
-            
-          </div>
+
+      <div class="col-md-9" id="mapid"></div>
+      <div class="col-md-3" style="padding: 0px; background: #004373; height:92vh; overflow: none;overflow-y: auto">
+        <div class="col-md-12" id="alert_cont" style=" margin-bottom: 20px; padding:0px; ">
+
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
-<div style="position: absolute;z-index: 999; bottom: 0px; height:auto; background: #fff; width: 300px;">
-  <div class="legendline">
-    <div class="row" style="text-align: center; padding-top: 0px; padding-bottom: 0px;"> <h4> LEGEND </h4></div>
-    <hr>
+  <div style="position: absolute;z-index: 999; bottom: 0px; height:auto; background: #fff; width: 300px;">
+    <div class="legendline">
+      <div class="row" style="text-align: center; padding-top: 0px; padding-bottom: 0px;">
+        <h4> LEGEND </h4>
+      </div>
+      <hr>
 
-    <div class="col-md-12 ldbox">
-      <span class="reg"> </span>
-      <h4> Region</h4>
-      <!-- <input class="chckdInput" id="regcheck" type='checkbox' checked> -->
-      <label class="switch" for="regcheck">
-        <input type="checkbox" id="regcheck" checked/>
-        <div class="slider round"></div>
-      </label>
-    </div>
-    <div class="col-md-12 ldbox">
-      <span class="dist"> </span>
+      <div class="col-md-12 ldbox">
+        <span class="reg"> </span>
+        <h4> Region</h4>
+        <h4> Region</h4>
+        <h4> Region</h4>
+        <!-- <input class="chckdInput" id="regcheck" type='checkbox' checked> -->
+        <label class="switch" for="regcheck">
+          <input type="checkbox" id="regcheck" checked />
+          <div class="slider round"></div>
+        </label>
+      </div>
+      <div class="col-md-12 ldbox">
+        <span class="dist"> </span>
         <h4> District</h4>
-    <!-- <input class="chckdInput" id="districtcheck" type='checkbox' checked> -->
-          <label class="switch" for="districtcheck">
-        <input type="checkbox" id="districtcheck" checked/>
-        <div class="slider round"></div>
-      </label>
-    </div>
-    <div class="col-md-12 ldbox">
-      <img src="/static/img/point.gif">
+        <!-- <input class="chckdInput" id="districtcheck" type='checkbox' checked> -->
+        <label class="switch" for="districtcheck">
+          <input type="checkbox" id="districtcheck" checked />
+          <div class="slider round"></div>
+        </label>
+      </div>
+      <div class="col-md-12 ldbox">
+        <img src="/static/img/point.gif">
         <h5> Galamsey Point</h5>
-    <!-- <input class="chckdInput" id="pointcheck" type='checkbox' checked> -->
-          <label class="switch" for="pointcheck">
-        <input type="checkbox" id="pointcheck" checked/>
-        <div class="slider round"></div>
-      </label>
-    </div>
+        <!-- <input class="chckdInput" id="pointcheck" type='checkbox' checked> -->
+        <label class="switch" for="pointcheck">
+          <input type="checkbox" id="pointcheck" checked />
+          <div class="slider round"></div>
+        </label>
+      </div>
 
+
+    </div>
 
   </div>
-  
-</div>
 
-<div>
-  
-</div>
+  <div>
+
+  </div>
 
 
-<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="modal-content">
-            <div class="modal-body">
-                <img src="" alt="" style="width:100%;" />
-            </div>
+      <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="modal-content">
+        <div class="modal-body">
+          <img src="" alt="" style="width:100%;" />
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
 
 
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 
- <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
 
 
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-<script src="/static/js/map.js"></script>
+  <script src="/static/js/map.js"></script>
 
 
-<script type="text/javascript">
-	
-  $.get("/galamsey/alert/" ,function(data){
+  <script type="text/javascript">
+    $.get("/galamsey/alert/", function (data) {
 
 
-    $('#alert_cont').html(data)
+      $('#alert_cont').html(data)
 
 
 
-     // $('#overlay').addClass('hidden');
+      // $('#overlay').addClass('hidden');
     })
 
 
-$(document).ready(function() {
-  $(".galamsey ").click(function() {
-      // alert("helloo")
-      getextent($(this).attr("id"))
-  })
-});
-
-</script>
+    $(document).ready(function () {
+      $(".galamsey ").click(function () {
+        // alert("helloo")
+        getextent($(this).attr("id"))
+      })
+    });
+  </script>
 
 
 
@@ -190,4 +323,5 @@ $(document).ready(function() {
 
 
 </body>
+
 </html>
